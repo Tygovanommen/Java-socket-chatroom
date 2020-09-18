@@ -31,17 +31,17 @@ public class UserThread {
             System.out.println("Connected!");
 
             // Start new user thread
-            ServerThread serverThread = new ServerThread(socket, user.getName());
-            Thread serverAccessThread = new Thread(serverThread);
-            serverAccessThread.start();
+            ServerThread serverThread = new ServerThread(socket, user, "start");
+            Thread accessThread = new Thread(serverThread);
+            accessThread.start();
 
-            serverThread.addNextMessage(user.getName() + " joined server.");
+            serverThread.addNextMessage("joined server!");
 
             // Wait for new user input
             Scanner scan = new Scanner(System.in);
-            while (serverAccessThread.isAlive()) {
+            while (accessThread.isAlive()) {
                 if (scan.hasNextLine()) {
-                    serverThread.addNextMessage(user.getName() + ": " + scan.nextLine());
+                    serverThread.addNextMessage(scan.nextLine());
                 }
             }
         } catch (IOException | InterruptedException ex) {

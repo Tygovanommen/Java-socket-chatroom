@@ -9,7 +9,7 @@ import java.util.List;
 public class Server {
 
     private final int port;
-    private List<UserThread> allThreads;
+    private final List<ThreadControl> allThreads = new ArrayList<>();
 
     /**
      * @param port port the socket should connect to.
@@ -22,7 +22,6 @@ public class Server {
      * Start socket server
      */
     public void startServer() {
-        this.allThreads = new ArrayList<>();
         try {
             // Create socket connection
             ServerSocket socketServer = new ServerSocket(this.port);
@@ -47,7 +46,7 @@ public class Server {
                 System.out.println("New user connected: " + socket.getRemoteSocketAddress());
 
                 // Start new user thread
-                UserThread user = new UserThread(this, socket);
+                ThreadControl user = new ThreadControl(this, socket);
                 Thread thread = new Thread(user);
                 thread.start();
 
@@ -59,7 +58,13 @@ public class Server {
         }
     }
 
-    public List<UserThread> getAllThreads() {
-        return this.allThreads;
+    public List<ThreadControl> getThreadsByRoom(String room) {
+        List<ThreadControl> threads = new ArrayList<>();
+        for(ThreadControl threadControl : this.allThreads) {
+            if (threadControl.getRoom().equals(room)) {
+                threads.add(threadControl);
+            }
+        }
+        return threads;
     }
 }
