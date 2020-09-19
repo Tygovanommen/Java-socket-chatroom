@@ -13,7 +13,6 @@ import java.util.TimeZone;
 public class ServerThread implements Runnable {
 
     private final Socket socket;
-    private String room;
     private final User user;
     private final LinkedList<String> newMessages;
     private boolean messageWaiting = false;
@@ -21,9 +20,8 @@ public class ServerThread implements Runnable {
     /**
      * @param socket current socket connection
      */
-    public ServerThread(Socket socket, User user, String room) {
+    public ServerThread(Socket socket, User user) {
         this.socket = socket;
-        this.room = room;
         this.user = user;
         this.newMessages = new LinkedList<>();
     }
@@ -70,7 +68,6 @@ public class ServerThread implements Runnable {
                     JSONObject json = new JSONObject();
                     json.put("name", user.getName());
                     json.put("message", nextSend);
-                    json.put("room", this.room);
                     json.put("timezone", TimeZone.getDefault().getID());
 
                     serverOut.println(json.toString());

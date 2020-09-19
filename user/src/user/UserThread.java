@@ -31,11 +31,9 @@ public class UserThread {
             System.out.println("Connected!");
 
             // Start new user thread
-            ServerThread serverThread = new ServerThread(socket, user, "start");
+            ServerThread serverThread = new ServerThread(socket, user);
             Thread accessThread = new Thread(serverThread);
             accessThread.start();
-
-            serverThread.addNextMessage("joined server!");
 
             // Wait for new user input
             Scanner scan = new Scanner(System.in);
