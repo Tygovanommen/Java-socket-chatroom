@@ -1,6 +1,6 @@
 package user;
 
-import java.util.Scanner;
+import gui.ChatRoom;
 
 public class Main {
 
@@ -9,30 +9,23 @@ public class Main {
     private static final String host = "localhost";
 
     public static void main(String[] args) {
-        UserThread userThread = new UserThread(host, port);
+        UserSocket userSocket = new UserSocket(host, port);
 
-        // Set User object
-        User user = new User(selectUserName());
+        ChatRoom chatRoom = new ChatRoom();
 
-        // Start User Thread
-        userThread.startUserThread(user);
-    }
-
-    /**
-     * Request username and let user fill it in
-     * @return username
-     */
-    private static String selectUserName() {
-        String userName = null;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Username:");
-        while (userName == null || userName.trim().equals("")) {
-            userName = scan.nextLine();
-            if (userName.trim().equals("")) {
-                System.out.println("Username can't be empty. Please enter again:");
+        // Wait till username is set
+        while (chatRoom.getUser() == null) {
+            System.out.println(chatRoom.getUser());
+            if (chatRoom.getUser() != null) {
+                // Connect to server
+                boolean connected = userSocket.connectSocket(chatRoom);
+                if (connected) {
+                     // Open chat screen
+                    chatRoom.chatScreen(userSocket);
+                } else {
+                    System.exit(1);
+                }
             }
         }
-        return userName;
     }
-
 }

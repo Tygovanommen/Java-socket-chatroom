@@ -31,7 +31,7 @@ private static final String host = "localhost";
     - [ ] Let user pick room
 - [ ] Ability to view and edit user profile.
 - [ ] Server config file
-- [ ] User server.commands
+- [x] User server.commands
     - [ ] commands from database or text file (based on config)
  
 ##### Data storage
@@ -41,9 +41,9 @@ private static final String host = "localhost";
     
 ##### User experience
 Executable file only work on console at the moment.
-- [ ] `User interface`
-    - [ ] Read messages.
-    - [ ] Send messages.
+- [x] `User interface`
+    - [x] Read messages.
+    - [x] Send messages.
 - [ ] Users can send Media.
 - [ ] Users can send links.
     
