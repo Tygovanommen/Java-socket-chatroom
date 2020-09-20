@@ -1,6 +1,8 @@
 package user;
 
-import gui.ChatRoom;
+import gui.screens.Chat;
+import gui.screens.Loading;
+import gui.screens.Login;
 
 public class Main {
 
@@ -11,17 +13,21 @@ public class Main {
     public static void main(String[] args) {
         UserSocket userSocket = new UserSocket(host, port);
 
-        ChatRoom chatRoom = new ChatRoom();
+        Login loginScreen = new Login();
 
         // Wait till username is set
-        while (chatRoom.getUser() == null) {
-            System.out.println(chatRoom.getUser());
-            if (chatRoom.getUser() != null) {
+        while (loginScreen.getUser() == null) {
+            System.out.println(loginScreen.getUser());
+            if (loginScreen.getUser() != null) {
                 // Connect to server
-                boolean connected = userSocket.connectSocket(chatRoom);
+                loginScreen.getFrame().dispose();
+                Chat chatScreen = new Chat(loginScreen.getUser(), userSocket);
+                Loading loadScreen = new Loading();
+                boolean connected = userSocket.connectSocket(chatScreen);
                 if (connected) {
-                     // Open chat screen
-                    chatRoom.chatScreen(userSocket);
+                    // Open chat screen
+                    loadScreen.getFrame().dispose();
+                    chatScreen.open();
                 } else {
                     System.exit(1);
                 }

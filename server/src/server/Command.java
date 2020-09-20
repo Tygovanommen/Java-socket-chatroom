@@ -16,10 +16,9 @@ public class Command {
         // If userinput starts with slash
         if (this.userInput.startsWith("/")) {
             this.isCommand = true;
-            switch (this.userInput) { // TBD GET COMMANDS FROM DATABASE OR FILE
+            switch (this.userInput.split(" ")[0]) {
                 case "/room":
                     this.roomChange = true;
-                    this.message = "Room changed.";
                     break;
                 case "/help":
                 case "/info":

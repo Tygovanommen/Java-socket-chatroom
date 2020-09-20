@@ -1,14 +1,12 @@
-package gui;
+package gui.screens;
 
 import org.json.simple.JSONObject;
 import user.User;
 import user.UserSocket;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -17,85 +15,23 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TimeZone;
 
-public class ChatRoom implements ActionListener, Runnable {
+public class Chat extends Screen implements Runnable {
 
-    private final String appName = "Java socket chatroom";
-
-    private final JFrame chatFrame = new JFrame(appName);
     private final LinkedList<String> newMessages = new LinkedList<>();
     private boolean messageWaiting = false;
     private UserSocket userSocket;
     private JButton sendMessage;
     private JTextField messageBox;
     private JTextArea chatBox;
+    private final User user;
 
-    private JFrame loginFrame;
-    private JTextField usernameChooser;
-    private User user;
-
-    private JFrame loadingFrame;
-
-    private String activeListener;
-
-    public ChatRoom() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        this.loginScreen();
-    }
-
-    public void loginScreen() {
-        chatFrame.setVisible(false);
-        loginFrame = new JFrame(appName);
-
-        JLabel chooseUsernameLabel = new JLabel("Username:");
-        usernameChooser = new JTextField(15);
-        JButton enterServer = new JButton("OK");
-        this.activeListener = "Login";
-        enterServer.addActionListener(this);
-        loginFrame.getRootPane().setDefaultButton(enterServer);
-
-        JPanel panel = new JPanel();
-        panel.add(chooseUsernameLabel);
-        panel.add(usernameChooser);
-        panel.add(enterServer);
-
-        // Add padding
-        panel.setBorder(new EmptyBorder(100, 100, 100, 100));
-
-        loginFrame.add(panel);
-
-        loginFrame.pack();
-        loginFrame.setLocationRelativeTo(null);
-        loginFrame.setVisible(true);
-    }
-
-    public void loadingScreen() {
-        loginFrame.setVisible(false);
-
-        loadingFrame = new JFrame(appName);
-
-        JLabel chooseUsernameLabel = new JLabel("Connecting...");
-
-        JPanel panel = new JPanel();
-        panel.add(chooseUsernameLabel);
-
-        // Add padding
-        panel.setBorder(new EmptyBorder(100, 100, 100, 100));
-
-        loadingFrame.add(panel);
-
-        loadingFrame.pack();
-        loadingFrame.setLocationRelativeTo(null);
-        loadingFrame.setVisible(true);
-    }
-
-    public void chatScreen(UserSocket userSocket) {
+    public Chat(User user, UserSocket userSocket) {
+        this.user = user;
         this.userSocket = userSocket;
+    }
 
-        this.loadingFrame.setVisible(false);
+    public void open() {
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
@@ -106,9 +42,11 @@ public class ChatRoom implements ActionListener, Runnable {
         messageBox.requestFocusInWindow();
 
         sendMessage = new JButton("Send Message");
-        this.activeListener = "Chat";
         sendMessage.addActionListener(this);
-        chatFrame.getRootPane().setDefaultButton(sendMessage);
+        this.getFrame().getRootPane().setDefaultButton(sendMessage);
+
+        JLabel roomLabel = new JLabel("Room: Home");
+        mainPanel.add(roomLabel, BorderLayout.NORTH);
 
         chatBox = new JTextArea();
         chatBox.setEditable(false);
@@ -136,53 +74,31 @@ public class ChatRoom implements ActionListener, Runnable {
         mainPanel.add(BorderLayout.SOUTH, southPanel);
 
         // Add padding
-        mainPanel.setBorder(new EmptyBorder(100, 100, 100, 100));
+        mainPanel.setBorder(defaultPadding);
 
         chatBox.append("Connected!\n");
 
         mainPanel.setPreferredSize(new Dimension(640, 480));
 
-        chatFrame.add(mainPanel);
-        chatFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        chatFrame.pack();
-        chatFrame.setLocationRelativeTo(null);
-        chatFrame.setVisible(true);
+        this.getFrame().add(mainPanel);
+        this.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getFrame().pack();
+        this.getFrame().setLocationRelativeTo(null);
+        this.getFrame().setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (this.activeListener.equals("Chat")) {
-            this.userMessanger();
-        } else if (this.activeListener.equals("Login")) {
-            String username = usernameChooser.getText();
-            if (username.length() < 1) {
-                JOptionPane.showMessageDialog(this.loginFrame, "Username can't be empty. Please enter again.");
-            } else {
-                this.user = new User(username);
-                loadingScreen();
-            }
-        }
-    }
-
-    private void userMessanger() {
         if (messageBox.getText().length() >= 1) {
-            this.addNextMessage(messageBox.getText());
+            if (userSocket.getAccessThread().isAlive()) {
+                synchronized (this.newMessages) {
+                    this.messageWaiting = true;
+                    this.newMessages.push(messageBox.getText());
+                }
+            }
             messageBox.setText("");
             messageBox.requestFocusInWindow();
         }
-    }
-
-    public void addNextMessage(String message) {
-        if (userSocket.getAccessThread().isAlive()) {
-            synchronized (this.newMessages) {
-                this.messageWaiting = true;
-                this.newMessages.push(message);
-            }
-        }
-    }
-
-    public User getUser() {
-        return this.user;
     }
 
     @Override
@@ -213,7 +129,7 @@ public class ChatRoom implements ActionListener, Runnable {
 
                     // Output message
                     JSONObject json = new JSONObject();
-                    json.put("name", user.getName());
+                    json.put("name", this.user.getName());
                     json.put("message", nextSend);
                     json.put("timezone", TimeZone.getDefault().getID());
 

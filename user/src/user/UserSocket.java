@@ -1,6 +1,6 @@
 package user;
 
-import gui.ChatRoom;
+import gui.screens.Chat;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -24,7 +24,7 @@ public class UserSocket {
     /**
      * Establish connection to socket
      */
-    public boolean connectSocket(ChatRoom chatroom) {
+    public boolean connectSocket(Chat runnable) {
         try {
             // Establish connection to socket server
             System.out.println("Connecting...");
@@ -32,7 +32,7 @@ public class UserSocket {
             Thread.sleep(1000);
             System.out.println("Connected!");
 
-            this.accessThread = new Thread(chatroom);
+            this.accessThread = new Thread(runnable);
             this.accessThread.start();
 
             return true;

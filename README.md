@@ -28,11 +28,12 @@ private static final String host = "localhost";
 - [x] Show when messages was sent in format: _08:00PM_
 - [x] When a new user joins a welcome message is shown to all users.
 - [x] Different `rooms`.
-    - [ ] Let user pick room
+    - [x] Let user pick room
 - [ ] Ability to view and edit user profile.
 - [ ] Server config file
 - [x] User server.commands
     - [ ] commands from database or text file (based on config)
+- [ ] Language file(s)
  
 ##### Data storage
 - [ ] All messages are saved in a `database`.
