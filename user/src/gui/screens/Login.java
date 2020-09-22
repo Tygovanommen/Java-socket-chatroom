@@ -1,14 +1,12 @@
 package gui.screens;
 
-import user.User;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class Login extends Screen {
 
+    private String userName;
     private final JTextField usernameChooser;
-    private User user;
 
     public Login() {
         usernameChooser = new JTextField(15);
@@ -37,11 +35,11 @@ public class Login extends Screen {
         if (username.length() < 1) {
             JOptionPane.showMessageDialog(this.getFrame(), "Username can't be empty. Please enter again.");
         } else {
-            this.user = new User(username);
+            this.userName = username;
         }
     }
 
-    public User getUser() {
-        return this.user;
+    public String getUserName() {
+        return this.userName;
     }
 }

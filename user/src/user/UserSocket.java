@@ -3,6 +3,7 @@ package user;
 import gui.screens.Chat;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.Socket;
 
 public class UserSocket {
@@ -24,13 +25,19 @@ public class UserSocket {
     /**
      * Establish connection to socket
      */
-    public boolean connectSocket(Chat runnable) {
+    public boolean connectSocket(Chat runnable, String userName) {
         try {
             // Establish connection to socket server
             System.out.println("Connecting...");
             this.socket = new Socket(this.host, this.port);
             Thread.sleep(1000);
             System.out.println("Connected!");
+
+            // Get Socket output stream
+            PrintStream output = new PrintStream(this.socket.getOutputStream());
+
+            // send nickname to server
+            output.println(userName);
 
             this.accessThread = new Thread(runnable);
             this.accessThread.start();

@@ -30,9 +30,10 @@ private static final String host = "localhost";
 - [x] Different `rooms`.
     - [x] Let user pick room
 - [ ] Ability to view and edit user profile.
-- [ ] Server config file
+- [ ] Server config file (JSON file with IP and port)
 - [x] User server.commands
     - [ ] commands from database or text file (based on config)
+    - [ ] Get list of online users
 - [ ] Language file(s)
  
 ##### Data storage
@@ -47,6 +48,8 @@ Executable file only work on console at the moment.
     - [x] Send messages.
 - [ ] Users can send Media.
 - [ ] Users can send links.
+- [ ] Adding styling to messagebox
+- [ ] Add emoji's
     
 ##### Roles
 - Mods:

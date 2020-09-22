@@ -5,11 +5,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Server {
 
     private final int port;
-    private final List<Receiver> allThreads = new ArrayList<>();
+    private final List<User> allThreads = new ArrayList<>();
 
     /**
      * @param port port the socket should connect to.
@@ -44,26 +45,33 @@ public class Server {
             try {
                 // Accept new user
                 Socket socket = serverSocket.accept();
-                System.out.println("New user connected: " + socket.getRemoteSocketAddress());
+                String username = (new Scanner( socket.getInputStream() )).nextLine();
+                username = username.replace(",", "").replace(" ", "_");
+                System.out.println("New Client: \"" + username + "\"\n\t     Host:" + socket.getRemoteSocketAddress());
 
-                // Start new user thread
-                Receiver user = new Receiver(this, socket);
-                Thread thread = new Thread(user);
-                thread.start();
+                // create new User
+                User newUser = new User(socket, username);
 
                 // Add user to User list
-                this.allThreads.add(user);
+                this.allThreads.add(newUser);
+
+                // Create a new thread incoming message of new user
+                new Thread(new Receiver(this, newUser)).start();
+
+                // Send welcome message
+                newUser.getOutStream().println("Welcome to the server!");
+
             } catch (IOException ex) {
                 System.out.println("Failed accepting new user on port: " + this.port);
             }
         }
     }
 
-    public List<Receiver> getThreadsByRoom(String room) {
-        List<Receiver> threads = new ArrayList<>();
-        for (Receiver receiver : this.allThreads) {
-            if (receiver.getRoom().equals(room)) {
-                threads.add(receiver);
+    public List<User> getThreadsByRoom(String room) {
+        List<User> threads = new ArrayList<>();
+        for (User user : this.allThreads) {
+            if (user.getRoom().equals(room)) {
+                threads.add(user);
             }
         }
         return threads;

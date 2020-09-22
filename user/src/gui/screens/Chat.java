@@ -1,7 +1,6 @@
 package gui.screens;
 
 import org.json.simple.JSONObject;
-import user.User;
 import user.UserSocket;
 
 import javax.swing.*;
@@ -19,14 +18,11 @@ public class Chat extends Screen implements Runnable {
 
     private final LinkedList<String> newMessages = new LinkedList<>();
     private boolean messageWaiting = false;
-    private UserSocket userSocket;
-    private JButton sendMessage;
+    private final UserSocket userSocket;
     private JTextField messageBox;
-    private JTextArea chatBox;
-    private final User user;
+    private final JTextArea chatBox = new JTextArea();
 
-    public Chat(User user, UserSocket userSocket) {
-        this.user = user;
+    public Chat(UserSocket userSocket) {
         this.userSocket = userSocket;
     }
 
@@ -41,14 +37,13 @@ public class Chat extends Screen implements Runnable {
         messageBox = new JTextField(30);
         messageBox.requestFocusInWindow();
 
-        sendMessage = new JButton("Send Message");
+        JButton sendMessage = new JButton("Send Message");
         sendMessage.addActionListener(this);
         this.getFrame().getRootPane().setDefaultButton(sendMessage);
 
         JLabel roomLabel = new JLabel("Room: Home");
         mainPanel.add(roomLabel, BorderLayout.NORTH);
 
-        chatBox = new JTextArea();
         chatBox.setEditable(false);
         chatBox.setFont(new Font("Serif", Font.PLAIN, 15));
         chatBox.setLineWrap(true);
@@ -75,8 +70,6 @@ public class Chat extends Screen implements Runnable {
 
         // Add padding
         mainPanel.setBorder(defaultPadding);
-
-        chatBox.append("Connected!\n");
 
         mainPanel.setPreferredSize(new Dimension(640, 480));
 
@@ -129,7 +122,6 @@ public class Chat extends Screen implements Runnable {
 
                     // Output message
                     JSONObject json = new JSONObject();
-                    json.put("name", this.user.getName());
                     json.put("message", nextSend);
                     json.put("timezone", TimeZone.getDefault().getID());
 

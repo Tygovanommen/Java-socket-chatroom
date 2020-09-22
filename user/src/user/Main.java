@@ -16,14 +16,14 @@ public class Main {
         Login loginScreen = new Login();
 
         // Wait till username is set
-        while (loginScreen.getUser() == null) {
-            System.out.println(loginScreen.getUser());
-            if (loginScreen.getUser() != null) {
+        while (loginScreen.getUserName() == null) {
+            System.out.println(loginScreen.getUserName());
+            if (loginScreen.getUserName() != null) {
                 // Connect to server
                 loginScreen.getFrame().dispose();
-                Chat chatScreen = new Chat(loginScreen.getUser(), userSocket);
+                Chat chatScreen = new Chat(userSocket);
                 Loading loadScreen = new Loading();
-                boolean connected = userSocket.connectSocket(chatScreen);
+                boolean connected = userSocket.connectSocket(chatScreen, loginScreen.getUserName());
                 if (connected) {
                     // Open chat screen
                     loadScreen.getFrame().dispose();
