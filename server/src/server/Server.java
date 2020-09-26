@@ -1,5 +1,7 @@
 package server;
 
+import org.json.simple.JSONObject;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -45,7 +47,7 @@ public class Server {
             try {
                 // Accept new user
                 Socket socket = serverSocket.accept();
-                String username = (new Scanner( socket.getInputStream() )).nextLine();
+                String username = (new Scanner(socket.getInputStream())).nextLine();
                 username = username.replace(",", "").replace(" ", "_");
                 System.out.println("New Client: \"" + username + "\"\n\t     Host:" + socket.getRemoteSocketAddress());
 
@@ -59,7 +61,9 @@ public class Server {
                 new Thread(new Receiver(this, newUser)).start();
 
                 // Send welcome message
-                newUser.getOutStream().println("Welcome to the server!");
+                JSONObject jsonReturn = new JSONObject();
+                jsonReturn.put("message", "Welcome to the server!");
+                newUser.getOutStream().println(jsonReturn.toString());
 
             } catch (IOException ex) {
                 System.out.println("Failed accepting new user on port: " + this.port);

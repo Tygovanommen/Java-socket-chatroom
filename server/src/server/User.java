@@ -24,11 +24,11 @@ public class User {
         nbUser += 1;
     }
 
-    public PrintStream getOutStream(){
+    public PrintStream getOutStream() {
         return this.streamOut;
     }
 
-    public InputStream getInputStream(){
+    public InputStream getInputStream() {
         return this.streamIn;
     }
 
@@ -44,7 +44,7 @@ public class User {
         this.room = room;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.userName;
     }
 

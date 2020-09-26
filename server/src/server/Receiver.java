@@ -19,7 +19,7 @@ public class Receiver implements Runnable {
 
     /**
      * @param server current server object
-     * @param user current user connection
+     * @param user   current user connection
      */
     public Receiver(Server server, User user) {
         this.server = server;
@@ -45,6 +45,7 @@ public class Receiver implements Runnable {
                     // Send message
                     Command command = new Command(message);
                     Map<String, User> sendThreads = new HashMap<>();
+                    JSONObject jsonReturn;
                     if (command.isCommand()) {
                         if (command.roomChange()) {
                             // Get second word of command to change room name
@@ -54,28 +55,40 @@ public class Receiver implements Runnable {
 
                                 // Show join message
                                 for (User thread : this.server.getThreadsByRoom(this.room)) {
-                                    sendThreads.put(thread.getUsername() + " joined room", thread);
+                                    jsonReturn = new JSONObject();
+                                    jsonReturn.put("message", thread.getUsername() + " joined room");
+                                    sendThreads.put(jsonReturn.toString(), thread);
                                 }
                             } catch (ArrayIndexOutOfBoundsException e) {
-                                sendThreads.put("Please fill in a room name.", this.user);
+                                jsonReturn = new JSONObject();
+                                jsonReturn.put("message", "Please fill in a room name.");
+                                sendThreads.put(jsonReturn.toString(), this.user);
                             }
                         } else {
                             // Server message
-                            sendThreads.put(command.getMessage(), this.user);
+                            jsonReturn = new JSONObject();
+                            jsonReturn.put("message", command.getMessage());
+                            sendThreads.put(jsonReturn.toString(), this.user);
                         }
                     } else {
                         // Normal message
                         if (this.room.equals("start")) {
-                            sendThreads.put("You're currently in no room, change room by typing /room {room_name}", this.user);
+                            jsonReturn = new JSONObject();
+                            jsonReturn.put("message", "You're currently in no room, change room by typing /room {room_name})");
+                            sendThreads.put(jsonReturn.toString(), this.user);
                         } else {
-                            String next = "(" + new SimpleDateFormat("h:mm a").format(new Date()) + ") ";
-                            next += this.user.getUsername() + ": " + message;
+                            String date = new SimpleDateFormat("h:mm a").format(new Date());
                             for (User thread : this.server.getThreadsByRoom(this.room)) {
-                                sendThreads.put(next, thread);
+                                jsonReturn = new JSONObject();
+                                jsonReturn.put("username", this.user.getUsername());
+                                jsonReturn.put("message", message);
+                                jsonReturn.put("time", date);
+                                sendThreads.put(jsonReturn.toString(), thread);
                             }
                         }
                     }
                     // Send the message
+                    System.out.println(sendThreads);
                     for (Map.Entry<String, User> entry : sendThreads.entrySet()) {
                         sendMessage(entry.getKey(), entry.getValue());
                     }

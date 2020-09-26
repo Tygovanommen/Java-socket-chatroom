@@ -1,7 +1,5 @@
 package user;
 
-import gui.screens.Chat;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -25,7 +23,7 @@ public class UserSocket {
     /**
      * Establish connection to socket
      */
-    public boolean connectSocket(Chat runnable, String userName) {
+    public boolean connectSocket(String userName, Runnable runnable) {
         try {
             // Establish connection to socket server
             System.out.println("Connecting...");
@@ -41,7 +39,6 @@ public class UserSocket {
 
             this.accessThread = new Thread(runnable);
             this.accessThread.start();
-
             return true;
         } catch (IOException | InterruptedException ex) {
             System.out.println("Something went wrong while connecting to server");

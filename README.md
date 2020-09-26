@@ -30,11 +30,13 @@ private static final String host = "localhost";
 - [x] Different `rooms`.
     - [x] Let user pick room
 - [ ] Ability to view and edit user profile.
+    - [ ] Popover to preview profile
 - [ ] Server config file (JSON file with IP and port)
 - [x] User server.commands
     - [ ] commands from database or text file (based on config)
     - [ ] Get list of online users
 - [ ] Language file(s)
+- [ ] Create Room class so not all threads have to be loop for each message
  
 ##### Data storage
 - [ ] All messages are saved in a `database`.
@@ -43,13 +45,17 @@ private static final String host = "localhost";
     
 ##### User experience
 Executable file only work on console at the moment.
+- [x] convert from swing to javafx
 - [x] `User interface`
     - [x] Read messages.
     - [x] Send messages.
+- [ ] Loading screen
 - [ ] Users can send Media.
 - [ ] Users can send links.
-- [ ] Adding styling to messagebox
+- [x] Adding styling to messagebox
 - [ ] Add emoji's
+- [ ] Custom top bar
+- [ ] Room navigation
     
 ##### Roles
 - Mods:

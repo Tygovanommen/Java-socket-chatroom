@@ -1,0 +1,8 @@
+.username {
+    -fx-font-weight: bold;
+}
+
+.date {
+    -fx-font-size: 10;
+    -fx-font-style: italic;
+}
