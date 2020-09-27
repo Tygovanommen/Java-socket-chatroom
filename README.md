@@ -1,9 +1,19 @@
-# Java socket chat room
+<h3 align="center">
+	Simple java socket chat room
+</h3>
 
-[![GitHub Release](https://img.shields.io/badge/release-v0.1_alpha-blue)](https://github.com/Tygovanommen/Java-socket-chatroom/tags)
-[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](/LICENSE)
-
+<p align="center">
 A simple java socket chatting application. Chat in different rooms with different people.
+</p>
+
+<p align="center">
+	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/tags"><img src="https://img.shields.io/badge/release-v0.1_alpha-blue" alt="Version badge"></a>
+	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License badge"></a>
+</p>
+
+<p align="center">
+	<img src="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/screenshot.png" width="550" alt="screenshot">
+</p>
 
 ## How to use
 
