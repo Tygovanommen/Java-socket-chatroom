@@ -1,64 +1,40 @@
-# Java socket chatroom
-A desktop socket chat application
+# Java socket chat room
 
-**[Server](/server)** and **[User](/user)** layer are separate applications. The Server layer only sets up the connection to the socket port and the Users layer connects to this created socket server.
+[![GitHub Release](https://img.shields.io/badge/release-v0.1_alpha-blue)](https://github.com/Tygovanommen/Java-socket-chatroom/tags)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](/LICENSE)
+
+A simple java socket chatting application. Chat in different rooms with different people.
 
 ## How to use
 
 Change the **port** and **host** property to desired value in [server.properties](/server.properties) and [user.properties](/user.properties)
 
-``` Java
+``` 
 port = 5000
 host = localhost
 ```
 
-1. Execute Server layer, either on local PC or on a server. Make sure the layer is active throughout the chatting process.
-2. Start the User layer on one or more environments.
-3. Start chatting in the User layer application!
-
+Before you open the client executable, make sure the Server layer is up and running. This can be either on a lcal PC or on a server.
 
 ## User Stories
 ##### General
-- [x] Give user ability to choose username.
-- [x] User can send messages.
-- [x] User can see messages of others.
-- [x] Show when messages was sent in format: _08:00PM_
-- [x] When a new user joins a welcome message is shown to all users.
-- [x] Different `rooms`.
-    - [x] Let user pick room
 - [ ] Ability to view and edit user profile.
     - [ ] Popover to preview profile
-- [x] Server/client config file
-- [x] User server.commands
+- [x] User server commands
     - [ ] commands from database or text file (based on config)
     - [ ] Get list of online users
 - [ ] Language file(s)
 - [ ] Create Room class so not all threads have to be loop for each message
+- [ ] User roles
  
 ##### Data storage
-- [ ] All messages are saved in a `database`.
-    - [ ] Previous **X** messages are visible when joining chat.
+- [ ] Messages are saved in `database`.
 - [ ] Let user create account.
     
 ##### User experience
-Executable file only work on console at the moment.
-- [x] convert from swing to javafx
-- [x] `User interface`
-    - [x] Read messages.
-    - [x] Send messages.
 - [ ] Loading screen
-- [ ] Users can send Media.
-- [ ] Users can send links.
-- [x] Adding styling to messagebox
+- [ ] Users can send Media and links.
 - [ ] Add emoji's
 - [ ] Custom top bar
 - [ ] Room navigation
-    
-##### Roles
-- Mods:
-    - [ ] Mute a user for everyone.
-    - [ ] Ban user account.
-- Users/ Guests:
-    - [ ] Create account
-    - [ ] Mute others.
-    - [ ] Start 1 on 1 chat.
+   
