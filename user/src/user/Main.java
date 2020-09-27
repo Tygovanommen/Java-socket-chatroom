@@ -17,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../guis/homeScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/guis/homeScreen.fxml"));
         primaryStage.setTitle("Java socket chatroom");
         primaryStage.setScene(new Scene(root, 400, 375));
         primaryStage.show();

@@ -1,5 +1,5 @@
 # Java socket chatroom
-A desktop socket chat application **(Currently under construction)**
+A desktop socket chat application
 
 **[Server](/server)** and **[User](/user)** layer are separate applications. The Server layer only sets up the connection to the socket port and the Users layer connects to this created socket server.
 
