@@ -88,7 +88,6 @@ public class Receiver implements Runnable {
                         }
                     }
                     // Send the message
-                    System.out.println(sendThreads);
                     for (Map.Entry<String, User> entry : sendThreads.entrySet()) {
                         sendMessage(entry.getKey(), entry.getValue());
                     }

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import user.Property;
 import user.UserSocket;
 
 import java.io.IOException;
@@ -15,8 +16,10 @@ import java.io.IOException;
 public class homeController {
 
     // Desired socket port and host
-    private final int port = 5000;
-    private final String host = "localhost";
+    private final Property property = new Property();
+
+    private final int port = Integer.parseInt(property.getProperty("port"));
+    private final String host = property.getProperty("host");
     private final UserSocket userSocket;
 
     public TextField usernameInput;

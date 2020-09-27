@@ -5,14 +5,11 @@ A desktop socket chat application **(Currently under construction)**
 
 ## How to use
 
-Change port variable to desired port in [server/Main](/server/src/server/Main.java) and [user/Main](/user/src/user/Main.java) 
-``` Java
-private static final int port = 5000;
-```
+Change the **port** and **host** property to desired value in [server.properties](/server.properties) and [user.properties](/user.properties)
 
-Change host variable to desired ip or keep on `localhost` in [user/Main](/user/src/user/Main.java)
 ``` Java
-private static final String host = "localhost";
+port = 5000
+host = localhost
 ```
 
 1. Execute Server layer, either on local PC or on a server. Make sure the layer is active throughout the chatting process.
@@ -31,7 +28,7 @@ private static final String host = "localhost";
     - [x] Let user pick room
 - [ ] Ability to view and edit user profile.
     - [ ] Popover to preview profile
-- [ ] Server config file (JSON file with IP and port)
+- [x] Server/client config file
 - [x] User server.commands
     - [ ] commands from database or text file (based on config)
     - [ ] Get list of online users
