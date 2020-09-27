@@ -7,8 +7,6 @@ import org.json.simple.parser.ParseException;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Receiver implements Runnable {
@@ -44,7 +42,6 @@ public class Receiver implements Runnable {
 
                     // Send message
                     Command command = new Command(message);
-                    Map<String, User> sendThreads = new HashMap<>();
                     JSONObject jsonReturn;
                     if (command.isCommand()) {
                         if (command.roomChange()) {
@@ -56,26 +53,26 @@ public class Receiver implements Runnable {
                                 // Show join message
                                 for (User thread : this.server.getThreadsByRoom(this.room)) {
                                     jsonReturn = new JSONObject();
-                                    jsonReturn.put("message", thread.getUsername() + " joined room");
-                                    sendThreads.put(jsonReturn.toString(), thread);
+                                    jsonReturn.put("message", this.user.getUsername() + " joined room");
+                                    sendMessage(jsonReturn.toString(), thread);
                                 }
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 jsonReturn = new JSONObject();
                                 jsonReturn.put("message", "Please fill in a room name.");
-                                sendThreads.put(jsonReturn.toString(), this.user);
+                                sendMessage(jsonReturn.toString(), this.user);
                             }
                         } else {
                             // Server message
                             jsonReturn = new JSONObject();
                             jsonReturn.put("message", command.getMessage());
-                            sendThreads.put(jsonReturn.toString(), this.user);
+                            sendMessage(jsonReturn.toString(), this.user);
                         }
                     } else {
                         // Normal message
                         if (this.room.equals("start")) {
                             jsonReturn = new JSONObject();
                             jsonReturn.put("message", "You're currently in no room, change room by typing /room {room_name})");
-                            sendThreads.put(jsonReturn.toString(), this.user);
+                            sendMessage(jsonReturn.toString(), this.user);
                         } else {
                             String date = new SimpleDateFormat("h:mm a").format(new Date());
                             for (User thread : this.server.getThreadsByRoom(this.room)) {
@@ -83,13 +80,9 @@ public class Receiver implements Runnable {
                                 jsonReturn.put("username", this.user.getUsername());
                                 jsonReturn.put("message", message);
                                 jsonReturn.put("time", date);
-                                sendThreads.put(jsonReturn.toString(), thread);
+                                sendMessage(jsonReturn.toString(), thread);
                             }
                         }
-                    }
-                    // Send the message
-                    for (Map.Entry<String, User> entry : sendThreads.entrySet()) {
-                        sendMessage(entry.getKey(), entry.getValue());
                     }
                 }
             }
