@@ -31,7 +31,7 @@ Before you open the client executable, make sure the Server layer is up and runn
 | ----- | --- |
 | /help or /info | Get a list of all commands |
 | /users | Get a list of all online users |
-| /room `room_name`  | Change the room you are in. Keep `room_name` empty to see what room you are current in |
+| /room `room_name`  | Change the room you are in. Keep `room_name` empty to see what room you are currently in |
 
 ## User Stories
 ##### General
