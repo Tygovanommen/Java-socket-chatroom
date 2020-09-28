@@ -42,7 +42,7 @@ public class homeController {
             chatController controller = loader.getController();
             controller.setUserSocket(userSocket);
             Scene child2 = new Scene(root, 600, 375);
-            child2.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            child2.getStylesheets().add(getClass().getResource("/resources/style.css").toExternalForm());
             Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
             window.setScene(child2);
 

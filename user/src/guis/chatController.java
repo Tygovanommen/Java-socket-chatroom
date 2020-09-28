@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -54,8 +55,8 @@ public class chatController implements Runnable {
             PrintWriter serverOut = new PrintWriter(socket.getOutputStream(), false);
             InputStream serverInStream = socket.getInputStream();
             Scanner serverIn = new Scanner(serverInStream);
-            // While socket connection is still active
 
+            // While socket connection is still active
             while (!socket.isClosed()) {
 
                 // If there is a new message from other users
@@ -104,11 +105,12 @@ public class chatController implements Runnable {
         if (json.get("username") != null) {
             Label name = new Label(json.get("username") + ": ");
             name.getStyleClass().add("username");
+            //Set current user color
+            name.setTextFill(Color.web((String) json.get("user_color")));
             gridpane2.add(name, 1, 0);
         }
 
         // Add message
-
         String message = new EmojiReplacer().replaceString((String) json.get("message"));
         gridpane2.add(new Label(message), 2, 0);
         gridpane.add(gridpane2, 1, 0);

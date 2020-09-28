@@ -21,13 +21,15 @@ public class EmojiReplacer {
         put("<3", 0x2764);
     }};
 
+    /**
+     * Loop through all emoji's and see if text in message can be replace
+     * @param message that needs emoji replacement
+     * @return new message with emoji's
+     */
     public String replaceString(String message) {
-        String[] messagePieces = message.split("\\s+");
-        for (int i = 0; i < messagePieces.length; i++) {
-            if (emojis.containsKey(messagePieces[i])) {
-                messagePieces[i] = new String(Character.toChars(emojis.get(messagePieces[i])));
-            }
+        for (HashMap.Entry<String, Integer> emojis : emojis.entrySet()) {
+            message = message.replace(emojis.getKey(), new String(Character.toChars(emojis.getValue())));
         }
-        return String.join(" ", messagePieces);
+        return message;
     }
 }

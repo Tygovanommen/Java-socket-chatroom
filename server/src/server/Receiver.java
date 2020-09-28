@@ -41,7 +41,7 @@ public class Receiver implements Runnable {
                     String message = (String) json.get("message");
 
                     // Send message
-                    Command command = new Command(message);
+                    Command command = new Command(message, this.server);
                     JSONObject jsonReturn;
                     if (command.isCommand()) {
                         if (command.roomChange()) {
@@ -58,7 +58,7 @@ public class Receiver implements Runnable {
                                 }
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 jsonReturn = new JSONObject();
-                                jsonReturn.put("message", "Please fill in a room name.");
+                                jsonReturn.put("message", "You are currently in room: " + this.room);
                                 sendMessage(jsonReturn.toString(), this.user);
                             }
                         } else {
@@ -78,6 +78,7 @@ public class Receiver implements Runnable {
                             for (User thread : this.server.getThreadsByRoom(this.room)) {
                                 jsonReturn = new JSONObject();
                                 jsonReturn.put("username", this.user.getUsername());
+                                jsonReturn.put("user_color", this.user.getColor());
                                 jsonReturn.put("message", message);
                                 jsonReturn.put("time", date);
                                 sendMessage(jsonReturn.toString(), thread);

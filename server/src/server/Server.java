@@ -71,6 +71,10 @@ public class Server {
         }
     }
 
+    public List<User> getAllThreads() {
+        return this.allThreads;
+    }
+
     public List<User> getThreadsByRoom(String room) {
         List<User> threads = new ArrayList<>();
         for (User user : this.allThreads) {

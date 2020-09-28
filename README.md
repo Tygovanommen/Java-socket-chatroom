@@ -24,7 +24,14 @@ port = 5000
 host = localhost
 ```
 
-Before you open the client executable, make sure the Server layer is up and running. This can be either on a lcal PC or on a server.
+Before you open the client executable, make sure the Server layer is up and running. This can be either on a local PC or on a server.
+
+## Commands
+| Command | Description |
+| ----- | --- |
+| /help or /info | Get a list of all commands |
+| /users | Get a list of all online users |
+| /room `room_name`  | Change the room you are in. Keep `room_name` empty to see what room you are current in |
 
 ## User Stories
 ##### General
@@ -47,4 +54,3 @@ Before you open the client executable, make sure the Server layer is up and runn
 - [ ] Add emoji's
 - [ ] Custom top bar
 - [ ] Room navigation
-   
