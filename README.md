@@ -12,7 +12,7 @@ A simple java socket chatting application. Chat in different rooms with differen
 </p>
 
 <p align="center">
-	<img src="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/screenshot.png" width="550" alt="screenshot">
+	<img src="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/demo.gif" width="550" alt="screenshot">
 </p>
 
 ## How to use
@@ -38,8 +38,8 @@ Before you open the client executable, make sure the Server layer is up and runn
 - [ ] Ability to view and edit user profile.
     - [ ] Popover to preview profile
 - [x] User server commands
+    - [x] Get list of online users
     - [ ] commands from database or text file (based on config)
-    - [ ] Get list of online users
 - [ ] Language file(s)
 - [ ] Create Room class so not all threads have to be loop for each message
 - [ ] User roles
@@ -50,7 +50,8 @@ Before you open the client executable, make sure the Server layer is up and runn
     
 ##### User experience
 - [ ] Loading screen
-- [ ] Users can send Media and links.
+- [ ] Users can send Media.
+- [ ] Users can send Links.
 - [ ] Add emoji's
 - [ ] Custom top bar
 - [ ] Room navigation

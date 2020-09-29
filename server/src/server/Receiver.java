@@ -13,7 +13,7 @@ public class Receiver implements Runnable {
 
     private final User user;
     private final Server server;
-    private String room = "start";
+    private String room = "";
 
     /**
      * @param server current server object
@@ -48,7 +48,12 @@ public class Receiver implements Runnable {
                             // Get second word of command to change room name
                             try {
                                 this.room = message.split(" ")[1];
-                                this.user.setRoom(room);
+                                this.user.setRoom(this.room);
+
+                                // Update user room
+                                jsonReturn = new JSONObject();
+                                jsonReturn.put("room", this.room);
+                                sendMessage(jsonReturn.toString(), this.user);
 
                                 // Show join message
                                 for (User thread : this.server.getThreadsByRoom(this.room)) {
@@ -69,7 +74,7 @@ public class Receiver implements Runnable {
                         }
                     } else {
                         // Normal message
-                        if (this.room.equals("start")) {
+                        if (this.room.equals("")) {
                             jsonReturn = new JSONObject();
                             jsonReturn.put("message", "You're currently in no room, change room by typing /room {room_name})");
                             sendMessage(jsonReturn.toString(), this.user);

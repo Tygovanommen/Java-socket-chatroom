@@ -3,7 +3,7 @@ package user;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmojiReplacer {
+public class TextValidator {
 
     private final Map<String, Integer> emojis = new HashMap<String, Integer>() {{
         put(":)", 0x1F60A);
@@ -26,10 +26,13 @@ public class EmojiReplacer {
      * @param message that needs emoji replacement
      * @return new message with emoji's
      */
-    public String replaceString(String message) {
-        for (HashMap.Entry<String, Integer> emojis : emojis.entrySet()) {
-            message = message.replace(emojis.getKey(), new String(Character.toChars(emojis.getValue())));
+    public String replaceEmoji(String message) {
+        if (message != null) {
+            for (HashMap.Entry<String, Integer> emojis : emojis.entrySet()) {
+                message = message.replace(emojis.getKey(), new String(Character.toChars(emojis.getValue())));
+            }
         }
         return message;
     }
+
 }

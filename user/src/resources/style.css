@@ -6,3 +6,19 @@
     -fx-font-size: 10;
     -fx-font-style: italic;
 }
+
+
+.text-area .scroll-pane,
+.text-area .scroll-pane .viewport,
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0px ;
+    -fx-padding: 0;
+}
+
+.textArea, .textArea:focused {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #1F629E;
+    -fx-border-radius: 30px;
+    -fx-padding: 7px 15px;
+}

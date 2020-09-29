@@ -10,6 +10,7 @@ public class UserSocket {
     private final int port;
     private Socket socket;
     private Thread accessThread;
+    private String userName;
 
     /**
      * @param host socket host to connect to
@@ -25,6 +26,7 @@ public class UserSocket {
      */
     public boolean connectSocket(String userName, Runnable runnable) {
         try {
+            this.userName = userName;
             // Establish connection to socket server
             System.out.println("Connecting...");
             this.socket = new Socket(this.host, this.port);
@@ -44,6 +46,10 @@ public class UserSocket {
             System.out.println("Something went wrong while connecting to server");
             return false;
         }
+    }
+
+    public String getUserName() {
+        return this.userName;
     }
 
     public Thread getAccessThread() {

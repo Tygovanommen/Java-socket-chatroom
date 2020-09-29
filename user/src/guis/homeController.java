@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import user.Main;
 import user.Property;
 import user.UserSocket;
 
@@ -36,23 +37,27 @@ public class homeController {
             errorAlert.setContentText("Username can't be empty. Please enter again.");
             errorAlert.showAndWait();
         } else {
-            // Load screen
+            // Initiate chat screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("chatScreen.fxml"));
             Parent root = loader.load();
             chatController controller = loader.getController();
             controller.setUserSocket(userSocket);
-            Scene child2 = new Scene(root, 600, 375);
-            child2.getStylesheets().add(getClass().getResource("/resources/style.css").toExternalForm());
-            Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            window.setScene(child2);
 
             // Wait till connected
             boolean connected = userSocket.connectSocket(username, controller);
             if (connected) {
                 // Open chat screen
+                Scene child2 = new Scene(root, Main.stageWidth, Main.stageHeight);
+                child2.getStylesheets().add(getClass().getResource("/resources/style.css").toExternalForm());
+                Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                window.setScene(child2);
                 window.show();
             } else {
-                System.exit(1);
+                // Show error popup
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setHeaderText("Server error");
+                errorAlert.setContentText("Unable to connect to server, please try again later.");
+                errorAlert.showAndWait();
             }
         }
     }
