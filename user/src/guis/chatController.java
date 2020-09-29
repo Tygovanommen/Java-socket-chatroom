@@ -133,8 +133,11 @@ public class chatController implements Runnable {
                 TextValidator validator = new TextValidator();
                 String messageEmoji = validator.replaceEmoji(message);
                 TextArea textArea = new TextArea(messageEmoji);
-                textArea.setPrefWidth(this.computeTextWidth(textArea.getFont(), textArea.getText()) + 30); // 10
-                int height = textArea.getText().split("\r\n|\r|\n").length * 31; // 17
+
+                double width = (this.computeTextWidth(textArea.getFont(), textArea.getText()) + 10) + 20;
+                textArea.setPrefWidth(width);
+
+                int height = (textArea.getText().split("\r\n|\r|\n").length * 17) + 14;
                 textArea.setMinHeight(height);
                 textArea.setMaxHeight(height);
                 textArea.setEditable(false);
