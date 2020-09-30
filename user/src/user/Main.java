@@ -28,7 +28,6 @@ public class Main extends Application {
             System.exit(0);
         });
 
-
         // Open home screen
         Parent root = FXMLLoader.load(getClass().getResource("/guis/homeScreen.fxml"));
         primaryStage.setTitle("Java socket chatroom");

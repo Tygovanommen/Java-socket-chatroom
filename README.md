@@ -7,6 +7,16 @@ A simple java socket chatting application chat room. Chat in different rooms wit
 </p>
 
 <p align="center">
+    <a href="#how-to-use">How to use</a>
+    ·
+    <a href="#features">Features</a>
+    ·
+    <a href="#commands">Commands</a>
+    ·
+    <a href="#user-stories">User Stories</a>
+ </p>
+
+<p align="center">
 	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/tags"><img src="https://img.shields.io/badge/release-v0.1_alpha-blue" alt="Version badge"></a>
 	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License badge"></a>
 </p>
@@ -26,6 +36,28 @@ host = localhost
 
 Before you open the client executable, make sure the Server layer is up and running. This can be either on a local PC or on a server.
 
+### User data storage
+
+User accounts/data is stored inside the [users.json](/users.json) file. This file can be manually adjusted or be automatically generated through the profile editing form.
+```json
+[
+  {
+    "color": "#669966ff",
+    "name": "User1",
+    "display_picture": "",
+    "notifications": "Yes"
+  }
+]
+``` 
+
+## Features
+- Multithreaded chatting (with rooms)
+- [User commands](#commands)
+- Create and update user accounts
+- Manage server and user properties
+
+Etc.
+
 ## Commands
 | Command | Description |
 | ----- | --- |
@@ -33,25 +65,17 @@ Before you open the client executable, make sure the Server layer is up and runn
 | /users | Get a list of all online users |
 | /room `room_name`  | Change the room you are in. Keep `room_name` empty to see what room you are currently in |
 
+
 ## User Stories
 ##### General
-- [ ] Ability to view and edit user profile.
-    - [ ] Popover to preview profile
-- [x] User server commands
-    - [x] Get list of online users
-    - [ ] commands from database or text file (based on config)
 - [ ] Language file(s)
 - [ ] Create Room class so not all threads have to be loop for each message
 - [ ] User roles
  
-##### Data storage
-- [ ] Messages are saved in `database`.
-- [ ] Let user create account.
-    
 ##### User experience
-- [ ] Loading screen
 - [ ] Users can send Media.
 - [ ] Users can send Links.
-- [ ] Add emoji's
 - [ ] Custom top bar
 - [ ] Room navigation
+- [ ] Set and change display picture
+- [ ] DM User by name

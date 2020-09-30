@@ -1,0 +1,14 @@
+[
+  {
+    "color": "#669966ff",
+    "name": "User1",
+    "display_picture": "",
+    "notifications": "Yes"
+  },
+  {
+    "color": "#e6b3ccff",
+    "name": "User2",
+    "display_picture": "",
+    "notifications": "No"
+  }
+]
