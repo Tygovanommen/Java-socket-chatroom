@@ -3,7 +3,7 @@
 </h3>
 
 <p align="center">
-A simple java socket chatting application chat room. Chat in different rooms with different people.
+A simple java socket chatting application or you can say simply it a chat room. Chat in different rooms with different people.
 </p>
 
 <p align="center">
