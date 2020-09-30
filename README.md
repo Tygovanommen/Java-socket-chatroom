@@ -36,9 +36,9 @@ host = localhost
 
 Before you open the client executable, make sure the Server layer is up and running. This can be either on a local PC or on a server.
 
-### User data storage
+#### User data storage
 
-User accounts/data is stored inside the [users.json](/users.json) file. This file can be manually adjusted or be automatically generated through the profile editing form.
+User accounts/data is stored inside the [users.json](/users.json) file. This file can be manually adjusted or be automatically generated through the profile editing form. It contains a json object of 1 or more users.
 ```json
 [
   {
@@ -67,12 +67,12 @@ Etc.
 
 
 ## User Stories
-##### General
+#### General
 - [ ] Language file(s)
 - [ ] Create Room class so not all threads have to be loop for each message
 - [ ] User roles
  
-##### User experience
+#### User experience
 - [ ] Users can send Media.
 - [ ] Users can send Links.
 - [ ] Custom top bar
