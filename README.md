@@ -7,6 +7,11 @@ A simple java socket chatting application chat room. Chat in different rooms wit
 </p>
 
 <p align="center">
+	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/tags"><img src="https://img.shields.io/badge/release-v0.1_alpha-blue" alt="Version badge"></a>
+	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License badge"></a>
+</p>
+
+<p align="center">
     <a href="#how-to-use">How to use</a>
     ·
     <a href="#features">Features</a>
@@ -15,11 +20,6 @@ A simple java socket chatting application chat room. Chat in different rooms wit
     ·
     <a href="#user-stories">User Stories</a>
  </p>
-
-<p align="center">
-	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/tags"><img src="https://img.shields.io/badge/release-v0.1_alpha-blue" alt="Version badge"></a>
-	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License badge"></a>
-</p>
 
 <p align="center">
 	<img src="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/demo.gif" width="550" alt="screenshot">
