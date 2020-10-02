@@ -75,6 +75,15 @@ public class Server {
         return this.allThreads;
     }
 
+    public User getThreadByName(String userName) {
+        for (User user : this.allThreads) {
+            if (user.getUsername().equals(userName)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public List<User> getThreadsByRoom(String room) {
         List<User> threads = new ArrayList<>();
         for (User user : this.allThreads) {

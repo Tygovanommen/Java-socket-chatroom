@@ -6,6 +6,7 @@ public class Command {
     private final String userInput;
     private boolean isCommand = false;
     private boolean roomChange = false;
+    private boolean isDM = false;
     private final Server server;
 
     public Command(String userInput, Server server) {
@@ -19,6 +20,8 @@ public class Command {
         if (this.userInput.startsWith("/")) {
             this.isCommand = true;
             switch (this.userInput.split(" ")[0]) {
+                case "/dm":
+                    this.isDM = true;
                 case "/users":
                     this.message = "Current online users:";
                     for (User user : this.server.getAllThreads()) {
@@ -34,6 +37,7 @@ public class Command {
                     this.message += "\n\t/users";
                     this.message += "\n\t/room {room_name}";
                     this.message += "\n\t/help";
+                    this.message += "\n\t/dm {user_name} {message}";
                     break;
                 default:
                     this.message = "Command does not exists.";
@@ -46,6 +50,10 @@ public class Command {
 
     public boolean isCommand() {
         return this.isCommand;
+    }
+
+    public boolean isDM() {
+        return this.isDM;
     }
 
     public boolean roomChange() {

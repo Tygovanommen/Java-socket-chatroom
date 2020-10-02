@@ -44,8 +44,8 @@ public class Receiver implements Runnable {
                     Command command = new Command(message, this.server);
                     JSONObject jsonReturn;
                     if (command.isCommand()) {
-                        if (command.roomChange()) {
-                            // Get second word of command to change room name
+
+                        if (command.roomChange()) {// Get second word of command to change room name
                             try {
                                 this.room = message.split(" ")[1];
                                 this.user.setRoom(this.room);
@@ -66,8 +66,25 @@ public class Receiver implements Runnable {
                                 jsonReturn.put("message", "You are currently in room: " + this.room);
                                 sendMessage(jsonReturn.toString(), this.user);
                             }
-                        } else {
-                            // Server message
+                        } else if (command.isDM()) {
+                            try {
+                                String[] splitMessage = message.split(" ");
+                                String userMessage = splitMessage[2];
+                                jsonReturn = new JSONObject();
+                                User selectedUser = this.server.getThreadByName(splitMessage[1]);
+                                if (selectedUser != null) {
+                                    jsonReturn.put("message", userMessage);
+                                    sendMessage(jsonReturn.toString(), selectedUser);
+                                } else {
+                                    jsonReturn.put("message", "User does not exist or is not online");
+                                    sendMessage(jsonReturn.toString(), this.user);
+                                }
+                            } catch (ArrayIndexOutOfBoundsException e) {
+                                jsonReturn = new JSONObject();
+                                jsonReturn.put("message", "Invalid dm format. Correct format: /dm {user_name} {message}");
+                                sendMessage(jsonReturn.toString(), this.user);
+                            }
+                        } else {// Server message
                             jsonReturn = new JSONObject();
                             jsonReturn.put("message", command.getMessage());
                             sendMessage(jsonReturn.toString(), this.user);

@@ -3,11 +3,11 @@
 </h3>
 
 <p align="center">
-A simple java socket chatting application chat room. Chat in different rooms with different people.
+A simple java socket chat room application. Chat in different rooms with different people.
 </p>
 
 <p align="center">
-	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/tags"><img src="https://img.shields.io/badge/release-v0.1_alpha-blue" alt="Version badge"></a>
+	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/tags"><img src="https://img.shields.io/badge/release-v0.2_alpha-blue" alt="Version badge"></a>
 	<a href="https://github.com/Tygovanommen/Java-socket-chatroom/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License badge"></a>
 </p>
 
@@ -64,7 +64,7 @@ Etc.
 | /help or /info | Get a list of all commands |
 | /users | Get a list of all online users |
 | /room `room_name`  | Change the room you are in. Keep `room_name` empty to see what room you are currently in |
-
+| /dm `user_name` `message` | send a DM (direct message) to a specific user |
 
 ## User Stories
 #### General
@@ -78,4 +78,3 @@ Etc.
 - [ ] Custom top bar
 - [ ] Room navigation
 - [ ] Set and change display picture
-- [ ] DM User by name
